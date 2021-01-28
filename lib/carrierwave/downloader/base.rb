@@ -21,7 +21,7 @@ module CarrierWave
       #
       def download(url, remote_headers = {})
         headers = remote_headers.
-          reverse_merge('User-Agent' => "CarrierWave/#{CarrierWave::VERSION}")
+          reverse_merge('User-Agent' => "CarrierWave/#{CarrierWave::VERSION}", :ssl_verify_mode => OpenSSL::SSL::VERIFY_NONE)
         begin
           file = OpenURI.open_uri(process_uri(url.to_s), headers)
         rescue StandardError => e
